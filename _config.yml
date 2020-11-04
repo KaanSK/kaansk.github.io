@@ -41,5 +41,5 @@ kramdown:
   hard_wrap: false
 
 plugins: ['jekyll-paginate','jekyll-seo-tag', 'jekyll-redirect-from']
-exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png', 'vendor']
 include: ['.well-known', 'robots.txt']
