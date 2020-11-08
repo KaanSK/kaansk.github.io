@@ -1,24 +1,24 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>DKHOS - Tag - Kaan S. Karadag&#39;s Blog</title>
-        <link>https://kaansk.github.io/tags/dkhos/</link>
+        <link>https://kaankaradag.com/tags/dkhos/</link>
         <description>DKHOS - Tag - Kaan S. Karadag&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>info@kaankaradag.com (Kaan S. Karadag)</managingEditor>
-            <webMaster>info@kaankaradag.com (Kaan S. Karadag)</webMaster><lastBuildDate>Mon, 19 Feb 2018 15:04:23 &#43;0000</lastBuildDate><atom:link href="https://kaansk.github.io/tags/dkhos/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>info@kaankaradag.com (Kaan S. Karadag)</webMaster><lastBuildDate>Mon, 19 Feb 2018 15:04:23 &#43;0000</lastBuildDate><atom:link href="https://kaankaradag.com/tags/dkhos/" rel="self" type="application/rss+xml" /><item>
     <title>DKHOS CTF - General Review</title>
-    <link>https://kaansk.github.io/dkhos-ctf-general-review/</link>
+    <link>https://kaankaradag.com/dkhos-ctf-general-review/</link>
     <pubDate>Mon, 19 Feb 2018 15:04:23 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://kaansk.github.io/dkhos-ctf-general-review/</guid>
+    <guid>https://kaankaradag.com/dkhos-ctf-general-review/</guid>
     <description><![CDATA[I got a text message on 10.01.2018 from one of the few people I enjoy working together on CTF competitions.
 Basically, he informed me about one of the biggest CTF events in Turkey and added 2 important things:
  This time we have a great team named KHORNE The goal is securing the first place and all members already agreed on donating prizes to The Foundation for Children with Leukemia in Turkey  Big day came and tasks were split.]]></description>
 </item><item>
     <title>DKHOS CTF - Writeups</title>
-    <link>https://kaansk.github.io/dkhos-ctf-writeups/</link>
+    <link>https://kaankaradag.com/dkhos-ctf-writeups/</link>
     <pubDate>Mon, 19 Feb 2018 15:04:23 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://kaansk.github.io/dkhos-ctf-writeups/</guid>
+    <guid>https://kaankaradag.com/dkhos-ctf-writeups/</guid>
     <description><![CDATA[Forensic 300 - Hadi Hoppala ve de Cuppala  The link provided in the task was a corrupted file with no clue.
 After a brief inspection on header, I understood that this was a 7z file but got corrupted.
 Found the instructions for proper header and footer values on http://www.7-zip.org/recover.html and started to work on this on the last 20 minutes but couldn&rsquo;t make it in time as I was having problem with CRC checksum.]]></description>
