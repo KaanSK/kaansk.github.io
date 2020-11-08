@@ -1,0 +1,50 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - Kaan S. Karadag&#39;s Blog</title>
+        <link>https://kaankaradag.com/posts/</link>
+        <description>All Posts | Kaan S. Karadag&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>info@kaankaradag.com (Kaan S. Karadag)</managingEditor>
+            <webMaster>info@kaankaradag.com (Kaan S. Karadag)</webMaster><lastBuildDate>Sun, 04 Mar 2018 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://kaankaradag.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Security.txt!? What is it and Why do we Need it</title>
+    <link>https://kaankaradag.com/now-we-have-security.txt/</link>
+    <pubDate>Sun, 04 Mar 2018 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://kaankaradag.com/now-we-have-security.txt/</guid>
+    <description><![CDATA[You all know about robots.txt already but are you aware of the proposal security.txt and how it will help your app/company?
+Security researchers often face problems when it comes to communicate the site-owner/company about a vulnerability and the app can be not in any bug bounty programs. Then, how should researcher share this information? Majority of time, the vulnerabilities found are just left undisclosed because of problems on communication side.]]></description>
+</item><item>
+    <title>DKHOS CTF - General Review</title>
+    <link>https://kaankaradag.com/dkhos-ctf-general-review/</link>
+    <pubDate>Mon, 19 Feb 2018 15:04:23 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://kaankaradag.com/dkhos-ctf-general-review/</guid>
+    <description><![CDATA[I got a text message on 10.01.2018 from one of the few people I enjoy working together on CTF competitions.
+Basically, he informed me about one of the biggest CTF events in Turkey and added 2 important things:
+ This time we have a great team named KHORNE The goal is securing the first place and all members already agreed on donating prizes to The Foundation for Children with Leukemia in Turkey  Big day came and tasks were split.]]></description>
+</item><item>
+    <title>DKHOS CTF - Writeups</title>
+    <link>https://kaankaradag.com/dkhos-ctf-writeups/</link>
+    <pubDate>Mon, 19 Feb 2018 15:04:23 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://kaankaradag.com/dkhos-ctf-writeups/</guid>
+    <description><![CDATA[Forensic 300 - Hadi Hoppala ve de Cuppala  The link provided in the task was a corrupted file with no clue.
+After a brief inspection on header, I understood that this was a 7z file but got corrupted.
+Found the instructions for proper header and footer values on http://www.7-zip.org/recover.html and started to work on this on the last 20 minutes but couldn&rsquo;t make it in time as I was having problem with CRC checksum.]]></description>
+</item><item>
+    <title>Reverse Engineering with Immunity Debugger</title>
+    <link>https://kaankaradag.com/reverse-engineering-with-immunity-debugger/</link>
+    <pubDate>Fri, 09 Feb 2018 15:04:23 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://kaankaradag.com/reverse-engineering-with-immunity-debugger/</guid>
+    <description><![CDATA[Reverse engineering is one of my favourite topics in CybSec. I haven&rsquo;t had any time to improve myself but from CTFs I have participated in and some seminars, I have some fundamental knowledge.
+In this blog post, I&rsquo;ll be analyzing an executable provided for Malware lecture in Cyber Security MSc. by Jaanus Kääp. His seminar was so exciting and we surely learnt a lot. I&rsquo;ll be using basic commandline tools on Kali Linux and Immunity Debugger.]]></description>
+</item><item>
+    <title>Hello World! and Using Ledger Nano S for PGP</title>
+    <link>https://kaankaradag.com/hello-world-and-using-ledger-nano-s-for-pgp/</link>
+    <pubDate>Sat, 03 Feb 2018 15:04:23 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://kaankaradag.com/hello-world-and-using-ledger-nano-s-for-pgp/</guid>
+    <description><![CDATA[I have been thinking about setting up a blog and sharing what I have been working on. On this journey, I&rsquo;ve tried several blog engines and failed miserably. After trial and failure phase, I decided to give a go on github pages and jekyll. And here we are!
+I will not go over all the bad things I have seen in those engines (I wont even name them here), but I&rsquo;d really like to share how I integrated my Ledger Nano S with pgp, git and SSH to safely store my private key, sign tags/commits and safely authenticate to my servers/GIT when I was working on building this blog.]]></description>
+</item></channel>
+</rss>
