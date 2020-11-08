@@ -1,0 +1,6 @@
+Contact: kaansk@gmail.com
+Encryption: http://pgp.circl.lu/pks/lookup?op=get&search=0xC87A8F9F5B2F03CB
+Acknowledgements: 
+Policy: 
+Signature: https://kaankaradag.com/.well-known/security.txt.sig
+Hiring: 
