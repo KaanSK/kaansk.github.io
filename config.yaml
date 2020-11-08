@@ -295,7 +295,7 @@ params:
     image: /images/Apple-Devices-Preview.png
     thumbnailUrl: /images/screenshot.png
   analytics:
-    enable: false
+    enable: true
     google:
       id: 'G-H73XGNYQ58'
       anonymizeIP: true
