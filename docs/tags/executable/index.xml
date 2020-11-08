@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>executable - Tag - Kaan S. Karadag&#39;s Blog</title>
-        <link>https://kaankaradag.com/tags/executable/</link>
+        <link>https://kaansk.github.io/tags/executable/</link>
         <description>executable - Tag - Kaan S. Karadag&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>info@kaankaradag.com (Kaan S. Karadag)</managingEditor>
-            <webMaster>info@kaankaradag.com (Kaan S. Karadag)</webMaster><lastBuildDate>Fri, 09 Feb 2018 15:04:23 &#43;0000</lastBuildDate><atom:link href="https://kaankaradag.com/tags/executable/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>info@kaankaradag.com (Kaan S. Karadag)</webMaster><lastBuildDate>Fri, 09 Feb 2018 15:04:23 &#43;0000</lastBuildDate><atom:link href="https://kaansk.github.io/tags/executable/" rel="self" type="application/rss+xml" /><item>
     <title>Reverse Engineering with Immunity Debugger</title>
-    <link>https://kaankaradag.com/reverse-engineering-with-immunity-debugger/</link>
+    <link>https://kaansk.github.io/reverse-engineering-with-immunity-debugger/</link>
     <pubDate>Fri, 09 Feb 2018 15:04:23 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://kaankaradag.com/reverse-engineering-with-immunity-debugger/</guid>
+    <guid>https://kaansk.github.io/reverse-engineering-with-immunity-debugger/</guid>
     <description><![CDATA[Reverse engineering is one of my favourite topics in CybSec. I haven&rsquo;t had any time to improve myself but from CTFs I have participated in and some seminars, I have some fundamental knowledge.
 In this blog post, I&rsquo;ll be analyzing an executable provided for Malware lecture in Cyber Security MSc. by Jaanus Kääp. His seminar was so exciting and we surely learnt a lot. I&rsquo;ll be using basic commandline tools on Kali Linux and Immunity Debugger.]]></description>
 </item></channel>
