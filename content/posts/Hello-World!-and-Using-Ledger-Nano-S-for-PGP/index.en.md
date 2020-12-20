@@ -5,6 +5,9 @@ title:  "Hello World! and Using Ledger Nano S for PGP"
 date:   2018-02-03 15:04:23
 categories: [pgp]
 tags: [pgp, ledger, nano s, GIT, signing, security, encryption, SSH]
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 ---
 
 I have been thinking about setting up a blog and sharing what I have been working on. On this journey, I've tried several blog engines and failed miserably. After trial and failure phase, I decided to give a go on github pages and jekyll. And here we are!

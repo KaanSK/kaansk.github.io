@@ -5,6 +5,9 @@ title:  "DKHOS CTF - Writeups"
 date:   2018-02-19 15:04:23
 categories: [CTF]
 tags: [CTF, DKHOS]
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 ---
 
 ---

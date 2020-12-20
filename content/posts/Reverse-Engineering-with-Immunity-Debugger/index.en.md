@@ -5,6 +5,9 @@ title:  "Reverse Engineering with Immunity Debugger"
 date:   2018-02-09 15:04:23
 categories: [reverse]
 tags: [reverse, engineering, immunity, strings, executable]
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 ---
 
 Reverse engineering is one of my favourite topics in CybSec. I haven't had any time to improve myself but from CTFs I have participated in and some seminars, I have some fundamental knowledge.

@@ -5,6 +5,9 @@ title:  "DKHOS CTF - General Review"
 date:   2018-02-19 15:04:23
 categories: [CTF]
 tags: [CTF, DKHOS]
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 ---
 
 I got a text message on 10.01.2018 from one of the few people I enjoy working together on CTF competitions.

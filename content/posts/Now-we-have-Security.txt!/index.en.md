@@ -5,6 +5,9 @@ title:  "Security.txt!? What is it and Why do we Need it"
 date:   2018-03-04
 categories: [appsec]
 tags: [securitytxt, RFC5785]
+resources:
+- name: "featured-image"
+  src: "featured-image.png"
 ---
 
 You all know about robots.txt already but are you aware of the proposal security.txt and how it will help your app/company?

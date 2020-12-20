@@ -56,10 +56,10 @@ languages:
           gravatarEmail: ''
           avatarURL: /images/avatar.png
           title: "Kaan S. Karadag"
-          subtitle: 'Cyber Security Engineer | Incident Response | Computer Engineering BSc. | CEH Master'
+          subtitle: 'Cyber Security Engineer | Incident Response'
           typeit: true
           social: true
-          disclaimer: ''
+          disclaimer: 'Computer Engineering BSc. | CEH Master | ECIH'
         posts:
           enable: true
           paginate: 6
@@ -279,7 +279,7 @@ params:
       images: []
       publisher:
         name: Kaan S. Karadag
-        logoUrl: /images/avatar.png
+        logoUrl: https://kaankaradag.com
   typeit:
     speed: 100
     cursorSpeed: 1000
@@ -337,7 +337,7 @@ markup:
 author:
   name: Kaan S. Karadag
   email: 'info@kaankaradag.com'
-  link: ''
+  link: 'mailto:info@kaankaradag.com'
 sitemap:
   changefreq: weekly
   filename: sitemap.xml
