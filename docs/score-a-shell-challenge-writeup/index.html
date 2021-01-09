@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Score a Shell Challenge Write-Up - Kaan S. Karadag&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="Score a Shell Challenge Write-Up" />
+<meta property="og:description" content="I found the CertifiedSecure platform and started to work on &ldquo;Score a Shell&rdquo; challenge.
+CertifiedSecure is an online training platform providing challenges on different levels and training materials. From their introduction:
+1 2  Certified Secure exists to encourage and fulfill the growing interest in IT Security knowledge and skills. We stand for openness, transparency and the sharing of knowledge; making sure everybody can experience and enjoy IT security. Security is serious fun!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kaankaradag.com/score-a-shell-challenge-writeup/" />
+<meta property="og:image" content="https://kaankaradag.com/logo.png"/>
+<meta property="article:published_time" content="2018-02-04T15:04:23+00:00" />
+<meta property="article:modified_time" content="2018-02-04T15:04:23+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kaankaradag.com/logo.png"/>
+
+<meta name="twitter:title" content="Score a Shell Challenge Write-Up"/>
+<meta name="twitter:description" content="I found the CertifiedSecure platform and started to work on &ldquo;Score a Shell&rdquo; challenge.
+CertifiedSecure is an online training platform providing challenges on different levels and training materials. From their introduction:
+1 2  Certified Secure exists to encourage and fulfill the growing interest in IT Security knowledge and skills. We stand for openness, transparency and the sharing of knowledge; making sure everybody can experience and enjoy IT security. Security is serious fun!"/>
+<meta name="application-name" content="Kaan S. Karadag&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Kaan S. Karadag&#39;s Blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://kaankaradag.com/score-a-shell-challenge-writeup/" /><link rel="prev" href="https://kaankaradag.com/hello-world-and-using-ledger-nano-s-for-pgp/" /><link rel="next" href="https://kaankaradag.com/reverse-engineering-with-immunity-debugger/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Score a Shell Challenge Write-Up",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kaankaradag.com\/score-a-shell-challenge-writeup\/"
+        },"image": ["https:\/\/kaankaradag.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  1363 ,
+        "url": "https:\/\/kaankaradag.com\/score-a-shell-challenge-writeup\/","datePublished": "2018-02-04T15:04:23+00:00","dateModified": "2018-02-04T15:04:23+00:00","publisher": {
+            "@type": "Organization",
+            "name": "Kaan S. Karadag","logo": "https:\/\/kaankaradag.com"},"author": {
+                "@type": "Person",
+                "name": "Kaan S. Karadag"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Kaan S. Karadag&#39;s Blog">Home</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kaan S. Karadag&#39;s Blog">Home</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Score a Shell Challenge Write-Up</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="mailto:info@kaankaradag.com" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kaan S. Karadag</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-04">2018-02-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1363 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>I found the <a href="https://www.certifiedsecure.com" target="_blank" rel="noopener noreffer">CertifiedSecure</a> platform and started to work on &ldquo;Score a Shell&rdquo; challenge.</p>
+<p><a href="https://www.certifiedsecure.com" target="_blank" rel="noopener noreffer">CertifiedSecure</a> is an online training platform providing challenges on different levels and training materials. From their introduction:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Certified Secure exists to encourage and fulfill the growing interest in IT Security knowledge and skills. We stand for openness, transparency and the sharing of knowledge; 
+making sure everybody can experience and enjoy IT security. Security is serious fun!
+</code></pre></td></tr></table>
+</div>
+</div><p>The challenge I wanted to work on was under &ldquo;Essential Specialities&rdquo;. From here it was looking like a more demanding challenge comparing to others.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-1.jpg"
+        data-srcset="/post5/post5-1.jpg, /post5/post5-1.jpg 1.5x, /post5/post5-1.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-1.jpg"
+        title="image" /></p>
+<p>The challenge description:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Take it to the next level! Score a shell is a tough challenge. The objective is to score a shell and to execute /secret/unlockme. This will result in an unlock code that you have to mail 
+to unlock@certifiedsecure.com. Make sure to mention your CS-ID and a short description of your methods.
+</code></pre></td></tr></table>
+</div>
+</div><p>Till here, I was expecting a semi-dynamic webpage where I should look for vulnerable inputs or path-traversals.</p>
+<p>The page was a static one with a background image. The background image was in &lsquo;/images&rsquo; folder. We will come back to this later. It was really lucky that I also noted this down when I first saw.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-2.jpg"
+        data-srcset="/post5/post5-2.jpg, /post5/post5-2.jpg 1.5x, /post5/post5-2.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-2.jpg"
+        title="image" /></p>
+<p>I started the recon phase with nikto to see if there is any abnormalities, files or just to have a grasp of possible folder structure quickly.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-3.jpg"
+        data-srcset="/post5/post5-3.jpg, /post5/post5-3.jpg 1.5x, /post5/post5-3.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-3.jpg"
+        title="image" /></p>
+<p>This robots.txt file could be of help. From here I also identified the /log/ path. If this path is followed, it redirects every request under it to</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">https://scoreshell.certifiedsecure.org/log/login.php
+</code></pre></td></tr></table>
+</div>
+</div><p>Utilized <a href="https://tools.kali.org/password-attacks/hydra" target="_blank" rel="noopener noreffer">hydra</a> to bruteforce the authentication mechanism with small payloads, just to see the errors but it was obvious that this challenge was not about &ldquo;brute forcing your way in&rdquo;.</p>
+<p>While using burp suite, I came across a warning like &ldquo;Unexpected Redirect Response Body&rdquo; and it was giving a big hint.</p>
+<p>After a brief search in google, I set-up my burp suite and wanted to follow the requests/responses to see this &ldquo;Response Body&rdquo;. To do that, after getting the initial request, burp should be
+intercepting the redirection in order us to bypass it. Redirection will happen with HTTP Status code 302 and we need to change this to 200 to let browser render instead of redirect to login.php</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-5.jpg"
+        data-srcset="/post5/post5-5.jpg, /post5/post5-5.jpg 1.5x, /post5/post5-5.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-5.jpg"
+        title="image" /></p>
+<p>And BINGO, before the redirection, this service actually responds with DMESG output. For more information on this vulnerability, you can see <a href="https://www.owasp.org/index.php/Execution_After_Redirect_%28EAR%29" target="_blank" rel="noopener noreffer">Execution After Redirect</a>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-6.jpg"
+        data-srcset="/post5/post5-6.jpg, /post5/post5-6.jpg 1.5x, /post5/post5-6.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-6.jpg"
+        title="image" /></p>
+<p>From this point, as I didn&rsquo;t know anything about the backend, I tried every possible variable I could change. From SessionIDs to url&hellip; But none of them worked in any way.
+After some hours of desperation, I wanted to go for some known enumerations with the hope of finding new resources on the system and tried index.php</p>
+<p>Second BINGO! Yes there was an index.php but on this point, as it&rsquo;s a php file, I couldnt get the logic inside that. Also, this made it clear that there are bunch of other resources in here.</p>
+<p>I tried to enumerate the resources and wanted to go for index.php as well. On this point, I also remembered the hint company gave me when they sent the assignment.
+They recommended to use tilde ~ on resources. Lets try it:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-7.jpg"
+        data-srcset="/post5/post5-7.jpg, /post5/post5-7.jpg 1.5x, /post5/post5-7.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-7.jpg"
+        title="image" /></p>
+<p>THIRD BINGO!</p>
+<p>The Editors like nano and vim creates swap files. This ~ helped us on finding this. Let&rsquo;s see the logic inside index.php.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-8.jpg"
+        data-srcset="/post5/post5-8.jpg, /post5/post5-8.jpg 1.5x, /post5/post5-8.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-8.jpg"
+        title="image" /></p>
+<p>As we suspected:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;authenticated&#39;</span><span class="p">]))</span> <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: /log/login.php&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This code is doing the actual redirection but the rest of the code is also getting executed. The important things here:</p>
+<ul>
+<li>There is a GET parameter &ldquo;localfile&rdquo;</li>
+<li>A mini firewall preventing usage of ./ and ../ which should be bypassed</li>
+<li>file_get_contents method</li>
+</ul>
+<p>So it was obvious to fuzz this &ldquo;localfile parameter&rdquo; and I set up my burp with loading the payloads. I generally use the payloads here: <a href="https://github.com/swisskyrepo/PayloadsAllTheThings">https://github.com/swisskyrepo/PayloadsAllTheThings</a> .
+Nice collection of different fields. Note here: I used the payloads on small amounts. After getting 10-15 responses, you can actually understand if it will work or not. No need to use entire file:).</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-9.jpg"
+        data-srcset="/post5/post5-9.jpg, /post5/post5-9.jpg 1.5x, /post5/post5-9.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-9.jpg"
+        title="image" /></p>
+<p>Unfortunately, couldnt find much. Got some directives but none of them seemed useful. At this point I needed to to some manual checking with <a href="https://hackingparadisesn.blogspot.com.ee/2015/05/introduction-to-local-file-inclusion.html" target="_blank" rel="noopener noreffer">Path Truncation</a>, in order to avoid this little firewall.</p>
+<p>And with using the payload</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">..././..././//./..././..././//./.../././//./etc/passwd
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-10.jpg"
+        data-srcset="/post5/post5-10.jpg, /post5/post5-10.jpg 1.5x, /post5/post5-10.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-10.jpg"
+        title="image" /></p>
+<p>FOURTH BINGO! In here I also saw the www user which hinted me there may be a www folder with web resources, actually at this point only resources I knew were index and login.php.</p>
+<p>As I didn&rsquo;t have much information, I just wanted to traverse and see the insides of folders one by one using &ldquo;localfile&rdquo; parameter I have prepared for LFI. This was the result for /usr and I just
+traversed through every folder here and their subfolders.</p>
+<p>In here, we do have a traversing solution but still do not have any place to upload any shell&hellip;</p>
+<p>FIFTH BINGO! I identified the folder for &ldquo;/log&rdquo; resources under &ldquo;usr/local/www/data/log/&rdquo;. Lets look into the services we have here:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-12.jpg"
+        data-srcset="/post5/post5-12.jpg, /post5/post5-12.jpg 1.5x, /post5/post5-12.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-12.jpg"
+        title="image" /></p>
+<p>We do have an &ldquo;upload-test&rdquo; and authentication php files here. Seems like we are really close to get that Shell!</p>
+<p>upload-test.php</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="c1">// Security: authenticate the user first
+</span><span class="c1"></span>
+	<span class="k">require</span> <span class="s2">&#34;authenticate.php&#34;</span><span class="p">;</span>
+
+	<span class="c1">// process the image upload
+</span><span class="c1"></span>
+	<span class="k">if</span><span class="p">((</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;image&#34;</span><span class="p">])))</span> <span class="p">{</span> 
+
+		<span class="nv">$filename</span> <span class="o">=</span> <span class="nx">basename</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;image&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">]);</span> 
+
+		<span class="c1">// security: must be a GIF image (important !!)
+</span><span class="c1"></span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">strpos</span><span class="p">(</span><span class="nv">$filename</span><span class="p">,</span> <span class="s2">&#34;.gif&#34;</span><span class="p">)</span> <span class="o">===</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span> 
+
+			<span class="k">print</span> <span class="s2">&#34;Security Breach!&#34;</span><span class="p">;</span> 
+			
+			<span class="k">exit</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="c1">// destination is /images/$filename 
+</span><span class="c1"></span>
+		<span class="nv">$destination</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&#34;DOCUMENT_ROOT&#34;</span><span class="p">]</span><span class="o">.</span><span class="s2">&#34;/images/&#34;</span><span class="p">;</span> 
+
+		<span class="nv">$destination</span> <span class="o">.=</span> <span class="nx">basename</span><span class="p">(</span><span class="nv">$filename</span><span class="p">);</span>
+		
+		<span class="c1">// move the uploaded file 
+</span><span class="c1"></span>
+		<span class="nv">$tmpname</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;image&#34;</span><span class="p">][</span><span class="s2">&#34;tmp_name&#34;</span><span class="p">];</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="nx">move_uploaded_file</span><span class="p">(</span><span class="nv">$tmpname</span><span class="p">,</span> <span class="nv">$destination</span><span class="p">))</span> <span class="p">{</span>
+
+			<span class="k">print</span> <span class="s2">&#34;Image uploaded, thanx!&#34;</span><span class="p">;</span>
+		
+		<span class="p">}</span> <span class="k">else</span> <span class="k">print</span> <span class="s2">&#34;Image upload failed&#34;</span><span class="p">;</span> 
+
+		<span class="k">exit</span><span class="p">;</span>
+	<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We should find a way to authenticate or bypass it to use this functionality. For that, let&rsquo;s look at &ldquo;authenticate.php&rdquo;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span>
+
+	<span class="c1">// both the username and password must be specified
+</span><span class="c1"></span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s2">&#34;username&#34;</span><span class="p">])</span> <span class="o">||</span> <span class="o">!</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s2">&#34;password&#34;</span><span class="p">]))</span> <span class="p">{</span>
+
+		<span class="k">print</span> <span class="s2">&#34;Missing username/password parameter&#34;</span><span class="p">;</span>
+
+		<span class="k">die</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="nv">$username</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s2">&#34;username&#34;</span><span class="p">];</span> 
+
+	<span class="nv">$password</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s2">&#34;password&#34;</span><span class="p">];</span>
+
+	<span class="c1">// prepare database connection 
+</span><span class="c1"></span>
+	<span class="nx">mysql_connect</span><span class="p">(</span><span class="s2">&#34;localhost&#34;</span><span class="p">,</span> <span class="s2">&#34;illustrated&#34;</span><span class="p">,</span> <span class="s2">&#34;PiVnmzctHEKKbMToOAcmZWI5&#34;</span><span class="p">);</span>
+
+	<span class="nx">mysql_select_db</span><span class="p">(</span><span class="s2">&#34;illustrated&#34;</span><span class="p">);</span>
+
+	<span class="c1">// validate the specified username 
+</span><span class="c1"></span>
+	<span class="nv">$res</span> <span class="o">=</span> <span class="nx">mysql_query</span><span class="p">(</span><span class="s2">&#34;SELECT id FROM users WHERE username = &#39;a&#39; union select &#39;123 union  select 123&#39; -- -&#39;&#34;</span><span class="p">);</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$res</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nx">mysql_fetch_row</span><span class="p">(</span><span class="nv">$res</span><span class="p">)))</span> <span class="p">{</span>
+
+		<span class="k">print</span> <span class="s2">&#34;Unknown username specified&#34;</span><span class="p">;</span>
+
+		<span class="k">die</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="c1">// validate the associated password
+</span><span class="c1"></span>	
+	<span class="nv">$res</span> <span class="o">=</span> <span class="nx">mysql_query</span><span class="p">(</span><span class="s2">&#34;SELECT password FROM users WHERE id = &#34;</span><span class="o">.</span><span class="nv">$row</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$res</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nx">mysql_fetch_row</span><span class="p">(</span><span class="nv">$res</span><span class="p">)))</span> <span class="p">{</span>
+
+		<span class="k">print</span> <span class="s2">&#34;Illegal userid record retrieved&#34;</span><span class="p">;</span>
+
+		<span class="k">die</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="nv">$password</span> <span class="o">!=</span> <span class="nv">$row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+
+		<span class="k">print</span> <span class="s2">&#34;Invalid password specified&#34;</span><span class="p">;</span>
+
+		<span class="k">die</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="c1">// Access Granted
+</span><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In this code, username and password is being fetched on 2 different sections and if username exists, its being feeded to the second one. The injection we should prepare should inject rogue statement to both.
+Meaning we will be exploiting the output of the first one.</p>
+<p>After trial and error I got the injection/authentication bypass right with payload:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">a&#39; union select &#39;123 union  select 123&#39; -- -    (also password will be suplied as 123 on GET parameter)
+</code></pre></td></tr></table>
+</div>
+</div><p>Lets try and use this image upload:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-13.jpg"
+        data-srcset="/post5/post5-13.jpg, /post5/post5-13.jpg 1.5x, /post5/post5-13.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-13.jpg"
+        title="image" /></p>
+<p>Even if we do have a valid file upload point here, we need to bypass the security checks on upload mechanism.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">strpos($filename, &#34;.gif&#34;) === false
+</code></pre></td></tr></table>
+</div>
+</div><p>So, including .gif in the name of the file seem to be the key here. I also downloaded php shells from: <a href="https://github.com/JohnTroony/php-webshells">https://github.com/JohnTroony/php-webshells</a>  and used cw.php as I had experience on this.</p>
+<p>SIXTH BINGO (In order to upload this, I intercepted the upload and added username and password to querystring parameters as authentication.php was included in
+upload-test.php and preventing any upload without these parameters.)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-14.jpg"
+        data-srcset="/post5/post5-14.jpg, /post5/post5-14.jpg 1.5x, /post5/post5-14.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-14.jpg"
+        title="image" /></p>
+<p>In the upload-test.login I also identified the upload folder in &ldquo;$destination = $_SERVER[&ldquo;DOCUMENT_ROOT&rdquo;].&quot;/images/&quot;; &quot; this was the same folder on my initial inspection so we do not need any more
+abra kadabra to move around.</p>
+<p>Using the shell we uploaded and getting the flag with URL <a href="https://scoreshell.certifiedsecure.org/images/%7BYOURSHELL%7D.gif.php:">https://scoreshell.certifiedsecure.org/images/{YOURSHELL}.gif.php:</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/post5/post5-15.jpg"
+        data-srcset="/post5/post5-15.jpg, /post5/post5-15.jpg 1.5x, /post5/post5-15.jpg 2x"
+        data-sizes="auto"
+        alt="/post5/post5-15.jpg"
+        title="image" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2018-02-04</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/score-a-shell-challenge-writeup/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://kaankaradag.com/score-a-shell-challenge-writeup/" data-title="Score a Shell Challenge Write-Up"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://kaankaradag.com/score-a-shell-challenge-writeup/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://kaankaradag.com/score-a-shell-challenge-writeup/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://kaankaradag.com/score-a-shell-challenge-writeup/" data-title="Score a Shell Challenge Write-Up"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://kaankaradag.com/score-a-shell-challenge-writeup/" data-title="Score a Shell Challenge Write-Up"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/hello-world-and-using-ledger-nano-s-for-pgp/" class="prev" rel="prev" title="Hello World! and Using Ledger Nano S for PGP"><i class="fas fa-angle-left fa-fw"></i>Hello World! and Using Ledger Nano S for PGP</a>
+            <a href="/reverse-engineering-with-immunity-debugger/" class="next" rel="next" title="Reverse Engineering with Immunity Debugger">Reverse Engineering with Immunity Debugger<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="mailto:info@kaankaradag.com" target="_blank">Kaan S. Karadag</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-H73XGNYQ58', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-H73XGNYQ58" async></script></body>
+</html>

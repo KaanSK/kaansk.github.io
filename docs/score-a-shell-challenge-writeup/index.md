@@ -1,13 +1,5 @@
----
-layout: post
-comments: true
-title:  "Score a Shell Challenge Write-Up"
-date:   2018-02-04 15:04:23
-categories: []
-tags: []
-#hidden: true
-#draft: true
----
+# Score a Shell Challenge Write-Up
+
 
 I found the [CertifiedSecure] platform and started to work on "Score a Shell" challenge.
 
@@ -259,4 +251,5 @@ Using the shell we uploaded and getting the flag with URL https://scoreshell.cer
 [Netsparker]: https://www.netsparker.com/
 [hydra]: https://tools.kali.org/password-attacks/hydra
 [CertifiedSecure]: https://www.certifiedsecure.com
+
 

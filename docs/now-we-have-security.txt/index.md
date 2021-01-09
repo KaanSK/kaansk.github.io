@@ -17,8 +17,6 @@ Now let's look at how Google implemented it:
 
 ![image](/post6/post6-2.jpg)
 
-And this is mine: [KaanSK Security.txt](https://kaansk.github.io/.well-known/security.txt)
-
 You can also realize _.well-known_ folder in URLs. This has been spesified in [RFC5785] as:
 
 
