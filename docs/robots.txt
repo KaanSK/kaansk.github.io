@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /score-a-shell-challenge-writeup/
+Disallow: /Score-a-Shell-Challenge-Writeup/
 Disallow: /key/
 Disallow: /key/*
