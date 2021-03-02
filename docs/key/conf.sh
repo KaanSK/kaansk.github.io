@@ -2,7 +2,7 @@
 
 sudo apt install -y wget gnupg2 gnupg-agent scdaemon pcscd git 
 mkdir -p ~/.gnupg
-wget https://raw.githubusercontent.com/KaanSK/kaansk.github.io/master/key/gpg-agent.conf -P ~/.gnupg
+wget https://raw.githubusercontent.com/KaanSK/kaansk.github.io/master/docs/key/gpg-agent.conf -P ~/.gnupg
 echo "export GPG_TTY=\"\$(tty)\"" >> ~/.bashrc
 echo "export SSH_AUTH_SOCK=\"/run/user/$UID/gnupg/S.gpg-agent.ssh\"" >> ~/.bashrc
 echo "gpg-connect-agent updatestartuptty /bye > /dev/null" >> ~/.bashrc
